@@ -1,0 +1,22 @@
+body {
+  background-color: peru;
+}
+h1 {
+  color:rgb(255, 0, 0);
+  transition:
+}
+.clicked {
+  color:#8e44ad;
+}
+.btn {
+  cursor: pointer;
+}
+
+.form,
+.greetings {
+  display: none;
+}
+
+.showing {
+  display: block;
+}
