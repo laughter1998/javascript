@@ -19,8 +19,8 @@ h1 {
 
 .showing {
   display: block;
+  
 }
-
 
 
 @keyframes fadeIn {
