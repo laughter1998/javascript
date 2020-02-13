@@ -7,18 +7,65 @@
   <title>Document</title>
 </head>
 <body>
+  <style>
+  .wrap {
+    position:relative;
+  }
+  .semo {
+    position:absolute;
+    left:300px;
+
+    width:50px;
+    height:100px;
+    border: 1px solid #ff0000;
+
+  }
+  .semo img {
+    width:100%;
+  }
+  </style>
+  <p>1</p>
+    <div id="title">하하</div>
+    <div class="width"></div>
+    <div class="wrap">
+      <div class="semo"><img src="https://cdn.crowdpic.net/list-thumb/thumb_l_5F0A00ADFF14013FEFB7043A6CFD2B93.jpg" alt=""></div>
+    </div>
     <script>
-      const cal = {
-        plus: function(a,b){
-          return  a + b;
-        },
-        minus: function(a,b){
-          return  a- b;
+      const title = document.querySelector("#title");
+      const winWidth = document.querySelector(".width");
+      const posSet = document.querySelector(".semo");
+      let rot = 0;
+      console.log(posSet.offsetLeft);
+      let currentWidth = window.innerWidth;
+      winWidth.innerText = currentWidth;
+      function handleClick(){
+        const moveWidth = window.innerWidth;
+        const stepBy = moveWidth- currentWidth;
+
+        // console.log( moveWidth - currentWidth);
+        if( currentWidth > moveWidth){
+          title.style.color="#55efc4";
+          title.innerText = "좌로 굴러";
+        } else {
+          title.style.color="#fdcb6e";
+          title.innerText = "우로 굴러";
+
+          // posSet.style.left = "200px";
+
         }
+        currentWidth = moveWidth;
+        winWidth.innerText = moveWidth;
+        const offRun = posSet.offsetLeft + stepBy;
+        rot = rot + stepBy;
+        console.log(offRun);
+        posSet.style.left = offRun + "px";
+        posSet.style.transform = "rotate( "+rot+"0deg )"
       }
-       const plus = cal.plus(5,5);
-       const minus = cal.minus(2,2);
-      console.log(plus);
+      // title.style.color="red";
+      // title.style.border="1px solid #6c5ce7";
+      window.addEventListener("resize", handleClick);
+      console.log(title);
+
     </script>
 </body>
 </html>

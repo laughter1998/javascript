@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<style>
+  .green {
+    color:#f9ca24 !important;
+  }
+</style>
+<h1 class="h1-title">타이틀</h1>
+<script>
+  const tit = document.querySelector(".h1-title");
+  tit.style.color="#f00"
+  tit.addEventListener("click",colorChange);
+  function colorChange(){
+    const hasClass = tit.classList.contains("green");
+    console.log(hasClass);
+    tit.classList.toggle("green");
+    // if(hasClass){
+    //   tit.classList.remove("green");
+    // }else {
+    //   tit.classList.add("green");
+    // }
+
+  }
+</script>
+</body>
+</html>

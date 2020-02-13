@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<style>
+body{
+  font-size:100%;
+}
+.currentTime{
+  font-size: 1050%;
+}
+.center, .center-below {
+    position: absolute;
+    left:50%;
+    top:50%;
+    width:100%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    font-size:100%;
+    color:#fff;
+}
+@media screen and (max-height: 550px){
+.center, .center-below {
+    font-size: 80%;
+  }
+}
+.bg {
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+
+
+
+
+}
+
+
+
+#bg_item {
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  opacity: 0;
+  background-image:url(./images/1.jpg);
+  background-size:cover;
+  background-position: center center;
+  background-repeat:no-repeat;
+
+}
+.fadein {
+
+  animation: fadein 1s ease-out 0s forwards;
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+</style>
+<div class="bg "><div id="bg_item"></div></div>
+<div class="center">
+  <div class="currentTime">
+ 11
+  </div>
+  <form action="">
+    <input type="text" placeholder="이름이 뭐야?">
+  </form>
+</div>
+  <script>
+  const clockTitle = document.querySelector(".currentTime"); //현재 시간 넣을 곳
+  const bgItem = document.querySelector("#bg_item");
+    function getTime(){
+      const clock = new Date();
+      const hour = clock.getHours();
+      const minute = clock.getMinutes();
+      const second = clock.getSeconds();
+      clockTitle.innerText = `${hour < 10? `0${hour}`: hour} : ${minute <10 ? `0${minute}`: minute} : ${second < 10 ? `0${second}` : second}`
+      // clockTitle.innerText = hour + ":" + minute + ":" + second;
+    }
+    function bgFade(){
+       bgItem.classList.add("fadein");
+
+    }
+    function init(){
+      getTime();
+      setInterval(getTime,1000);
+      window.addEventListener("load", bgFade)
+    }
+    init();
+  </script>
+</body>
+</html>
