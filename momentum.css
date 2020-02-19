@@ -1,0 +1,130 @@
+body, div, p, span, ul, li {
+  margin:0;
+  padding: 0;
+}
+body{
+  font-size:100%;
+
+}
+.currentTime{
+  font-size: 1050%;
+}
+.center, .center-below {
+    position: absolute;
+    left:50%;
+    top:50%;
+    width:100%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    font-size:100%;
+    color:#fff;
+}
+@media screen and (max-height: 550px){
+.center, .center-below {
+    font-size: 80%;
+  }
+}
+.bg {
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+
+
+
+
+}
+
+
+
+#bg_item {
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  opacity: 0;
+  background-image:url(./images/2.jpg);
+  background-size:cover;
+  background-position: center center;
+  background-repeat:no-repeat;
+
+}
+.fadein {
+
+  animation: fadein 1s ease-out 0s forwards;
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+.greeting {
+  display:none;
+  font-size: 337.5%;
+}
+.showing {
+  display:block !important;
+}
+.js-form {
+  display:none;
+}
+
+/* 오른쪽 상단 날씨 정보 */
+.top-row {
+  z-index: 4;
+  display: flex;
+  align-items: flex-start;
+  position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    flex: 1 1 auto;
+    position: relative;
+    display: flex;
+    color:#ffffff;
+}
+.top-left {
+    --max-height: 64px;
+    --side-padding: 8px;
+    align-items: stretch;
+}
+.top-right {
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    text-align: right;
+    flex: 1 1 auto;
+    position: relative;
+    display: flex;
+}
+.top-right .metric-item {
+    padding: 11px 10px 10px;
+}
+.metric-item {
+    position: relative;
+    border-radius: 2px;
+    text-align: right;
+    vertical-align: top;
+    display: inline-block;
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+.icon-weather img {
+  width: 26px;
+}
+.mertic-label {
+    margin: 0;
+    padding: 0 0 3px;
+    display: inline-block;
+    font-size: .8125rem;
+    overflow-wrap: break-word;
+    transition: opacity .5s ;
+    word-break: break-word;
+    vertical-align: top;
+}
