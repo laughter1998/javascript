@@ -1,4 +1,4 @@
-body, div, p, span, ul, li {
+body, div, p, span, ul, li,h1,h2,h3,h4,h5 {
   margin:0;
   padding: 0;
 }
@@ -45,7 +45,7 @@ body{
   top:0;
   bottom:0;
   opacity: 0;
-  background-image:url(./images/2.jpg);
+  background-image:url(./images/4.jpg);
   background-size:cover;
   background-position: center center;
   background-repeat:no-repeat;
@@ -127,4 +127,86 @@ body{
     transition: opacity .5s ;
     word-break: break-word;
     vertical-align: top;
+}
+/* 오늘의 중요한일 */
+.focus-wrapper {
+  position:relative;
+  display: flex;
+      justify-content: center;
+      min-height: 93px;
+      font-size: 187.5%;
+}
+.focus-wrapper h3 {
+  font-size: 2.1875rem;
+  font-weight: 300;
+}
+.focus-wrapper input {
+    width: 100%;
+    padding-top: 4px;
+    display: block;
+    background: 0;
+    border: 0;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    font-weight: 500;
+    outline: 0;
+    text-align: center;
+    transition: border-color .2s ease;
+    font-size: 120%;
+    line-height: 120%;
+}
+.focus-wrapper .focus-today {
+  display:none;
+}
+.focuses .focus-content {
+    display:none;
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+.focuses .focus h3 {
+    margin: 17px 0 3px;
+    font-size: 70%;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+.focuses .focus-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    font-size: 120%;
+    line-height: 120%;
+}
+.focuses .col-checkbox {
+    justify-content: flex-end;
+}
+.focuses .checkbox {
+    margin-right: .15em;
+    padding: 10px;
+    position: relative;
+    border: none;
+    font-size: 80%;
+    line-height: 1;
+    text-align: left;
+    text-shadow: 0 0 15px rgba(0,0,0,.3);
+}
+.col-delete {
+  display: inline-flex;
+  opacity: 0;
+  width:48px;
+  border-radius: 48px;
+  cursor: pointer;
+  transition: all .2s ease;
+  transform-origin: 50% 50%;
+  margin-left: 20px;
+
+  text-align:center;
+
+}
+.focus-content:hover .col-delete {
+  opacity:1;
+}
+.icon-wrapper {
+  color:#000;
+  font-size:70%;
 }

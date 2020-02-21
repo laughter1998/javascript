@@ -35,19 +35,167 @@
   </form>
   <div class="greeting">hi, laughter98</div>
 
+  <div class="focus-wrapper focuses">
+    <div class="focus-today showing">
+    <form action="" class="main-form ">
+    <h3>What is your main focus for today?</h3>
+    <input type="text" autocomplete="off">
+    </form>
+  </div>
+  <div class="focus-content">
+		<h3 class="focus-title">Today</h3>
+		<div class="focus-row has-centered-3-col">
+			<span class="side-col col-checkbox">
+				<span class="control checkbox" data-test="complete">
+					<i class="icon icon-checkbox-empty focus-open"></i><i class="icon icon-checkbox focus-done"></i>
+				</span>
+			</span>
+			<span class="center-col todays-focus" data-test="focus-active">ㅇㅇㅇ</span>
+			<span class="side-col col-delete">
+				<span class="control delete btn-delete" data-test="delete">
+					<span class="icon-wrapper dash-icon">
+					  X
+					</span>
+				</span>
+			</span>
+		</div>
+	</div>
+  </div>
 
 </div>
+<style>
+  .to-do-wrap {
+    position:fixed;
+    right:0;
+    bottom:0;
+    display:flex;
+    
+    color:#ffffff;
+    align-items: flex-end;
+    padding:30px 10px;
+  }
+ul.to-do-list li {
+  position:relative;
+}
+ul.to-do-list li span {
+  display:none;
+  position: absolute;
+  right:0;
+  top:0;
+  color:#000000;
+  cursor:pointer;
+}
+ul.to-do-list li:hover span {
+  display:block;
+}
+.to-do-container input {
+    width: 100%;
+    padding-top: 4px;
+    display: block;
+    background: 0;
+    border: 0;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    font-weight: 500;
+    outline: 0;
+    text-align: center;
+    transition: border-color .2s ease;
+    font-size: 120%;
+    line-height: 120%;
+}
+</style>
+<div class="to-do-wrap">
+  <div class="to-do-container">
+  <h3>할일 목록</h3>
+  <form action="" class="do-list-form ">
+    <input type="text" />
+  </form>
+  <ul class="to-do-list">
+  </ul>
 
+</div>
+</div>
   <script>
   const clockTitle = document.querySelector(".currentTime"); //현재 시간 넣을 곳
   const bgItem = document.querySelector("#bg_item");
   const form = document.querySelector(".js-form");
-  const input = document.querySelector("input");
+  const input = form.querySelector("input");
   const myName = document.querySelector(".greeting");
   const cityName = document.querySelector(".city");
   const cityTemp = document.querySelector(".metric-stat-number");
   const cityWeather = document.querySelector(".icon-weather");
   const iconImg = document.querySelector(".icon1");
+  const mainForm = document.querySelector(".main-form");
+  const mainInput = mainForm.querySelector("input");
+  const focusToday =document.querySelector(".focus-today");
+  const focusContent =document.querySelector(".focus-content");
+  const todayContent = focusContent.querySelector(".todays-focus");
+  const DeleteToDo = document.querySelector(".btn-delete");
+  const toDoContainer = document.querySelector(".to-do-container");
+  const toDoList = document.querySelector(".to-do-list");
+  const toDoForm = document.querySelector(".do-list-form");
+  const toDoinput = toDoForm.querySelector("input");
+
+  const TODOS_LS = "toDos";
+  let toDos = [];
+  // 할일 리스트
+  function doListSubmit(){
+    event.preventDefault();
+    const currentInput = toDoinput.value;
+    printDo(currentInput);
+    toDoinput.value="";
+
+  }
+  function printDo(text){
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    const newId = toDos.length + 1;
+    li.id = newId;
+    li.innerText = text;
+    span.innerText = "X";
+    toDoList.appendChild(li);
+    li.appendChild(span);
+    const toDoObj = {
+      text : text,
+      id : newId
+    }
+    span.addEventListener("click",deleteToDo);
+    toDos.push(toDoObj);
+    saveToDos();
+
+  }
+  function deleteToDo(event){
+    const li = event.target.parentNode;
+    const li2 = event.target.parentNode.nodeName;
+
+    toDoList.removeChild(li);
+    const cleanToDos = toDos.filter(function(toDo){
+      // console.log(parseInt(li.id));
+      // console.log(toDo);
+      // console.log(toDo);
+      return toDo.id !== parseInt(li.id) ;
+
+      // return toDo.id !== parseInt(li.id);
+    });
+console.log(cleanToDos);
+toDos = cleanToDos
+saveToDos();
+  }
+  function saveToDos(){
+    localStorage.setItem(TODOS_LS,JSON.stringify(toDos));
+
+  }
+  function loadToDos(){
+    const  loadedToDos = localStorage.getItem(TODOS_LS);
+    if (loadedToDos !== null){
+
+      const parseToDos = JSON.parse(loadedToDos);
+      parseToDos.forEach(function(abc){
+        printDo(abc.text);
+      })
+    }
+
+  }
     function getTime(){
       const clock = new Date();
       const hour = clock.getHours();
@@ -77,7 +225,7 @@
     }
     function loadName(){
       const currentUser = localStorage.getItem("currentUser2");
-      if( currentUser == ""){
+      if( currentUser === null){
           askForName();
       } else {
           form.classList.remove("showing");
@@ -85,12 +233,52 @@
             myName.innerText = currentUser;
       }
     }
+    function saveToday(text){
+      localStorage.setItem("todayMain",text);
+        DeleteToDo.addEventListener("click",deleteTo);
+    }
+    function todaySubmit(){
+      event.preventDefault();
+
+      const todayValue = mainInput.value;
+      saveToday(todayValue);
+      todayContent.innerText = todayValue;
+      focusToday.classList.remove("showing");
+      focusContent.classList.add("showing");
+    }
+    function askForToday(){
+
+      mainForm.addEventListener("submit",todaySubmit);
+    }
+    function loadToday(){
+      const todayMain = localStorage.getItem("todayMain");
+      if ( todayMain === null){
+          askForToday();
+      } else {
+
+        focusToday.classList.remove("showing");
+        focusContent.classList.add("showing");
+        todayContent.innerText = todayMain;
+        DeleteToDo.addEventListener("click",deleteTo);
+      }
+    }
+    function deleteTo(){
+      localStorage.removeItem("todayMain");
+      focusContent.classList.remove("showing");
+      focusToday.classList.add("showing");
+      mainInput.value='';
+      askForToday();
+
+    }
     function init(){
       getTime();
       setInterval(getTime,1000);
-
+      loadToday();
       loadName();
-      window.addEventListener("load", bgFade)
+      loadToDos();
+      window.addEventListener("load", bgFade);
+      toDoForm.addEventListener("submit",doListSubmit);
+
     }
     init();
   </script>
